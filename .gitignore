@@ -1,0 +1,430 @@
+################################################################################
+# GLOBAL / ROOT
+################################################################################
+
+# OS-specific
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editor / IDE
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode-test/
+*.code-workspace
+
+# Logs & runtime
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.pid
+*.seed
+*.pid.lock
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+.envrc
+*.key
+*.pem
+*.p12
+*.crt
+
+# Coverage / test outputs
+coverage/
+.nyc_output/
+lcov.info
+reports/
+test-results/
+junit-report.xml
+
+# Build / dist / cache
+dist/
+build/
+out/
+.tmp/
+temp/
+tmp/
+.cache/
+.cache-loader/
+.npm/
+.pnpm-store/
+.yarn/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.bazel-*
+
+# Package managers lockfiles (keep the ones you need)
+# Uncomment if you want to ignore specific ones project-wide:
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+################################################################################
+# PYTHON (python-server and any other Python modules)
+################################################################################
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*.pyo
+__pycache__/
+*$py.class
+
+# C extensions
+*.so
+*.pyd
+*.dll
+
+# Distribution / packaging
+.python-version
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+MANIFEST
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+.pytest_cache/
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pyre/
+.mypy_cache/
+.dmypy.json
+.dmypy/
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# Flask / general web
+instance/
+.webassets-cache/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Virtual environments
+venv/
+env/
+env.bak/
+venv.bak/
+.venv/
+.python_env/
+.env.python/
+.conda/
+conda-env/
+
+# Poetry / pipenv
+.poetry/
+poetry.lock
+Pipfile.lock
+
+################################################################################
+# NODE / JAVASCRIPT (js-server and any other Node/JS modules)
+################################################################################
+
+# Node modules
+node_modules/
+
+# Build outputs
+lib/
+es/
+esm/
+tsbuildinfo/
+*.tsbuildinfo
+
+# TypeScript
+*.tsbuildinfo
+*.tscache
+tsconfig.tsbuildinfo
+
+# Next.js / Nuxt / React / Svelte etc.
+.next/
+.nuxt/
+out/
+.svelte-kit/
+.vite/
+vite.config.timestamp-*.mjs
+
+# Storybook
+.out/
+.storybook-out/
+storybook-static/
+
+# Jest / other test runners
+jest-html-reporters-*.html
+jest-nyt/
+jest-cache/
+*.jest-test-results.json
+
+# Cypress / Playwright / Puppeteer
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+playwright-report/
+test-results/
+.trash/
+
+# Parcel
+.cache/
+.parcel-cache/
+
+# Webpack
+webpack-assets.json
+webpack-stats.json
+
+# Bower
+bower_components/
+
+# Misc
+*.tgz
+*.gz
+*.br
+*.map
+*.tmp
+.npmrc.local
+.eslintcache
+.stylelintcache
+
+################################################################################
+# JAVA (java-client and any Java modules)
+################################################################################
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ / Eclipse / NetBeans
+*.iml
+*.ipr
+*.iws
+.idea/
+.classpath
+.project
+.settings/
+bin/
+.nb-gradle/
+
+# Logs & temp
+hs_err_pid*
+replay_pid*
+*.log
+*.tmp
+
+# Java web / server specific
+*.war
+*.ear
+*.aar
+*.nar
+
+# Lombok config
+lombok.config
+
+################################################################################
+# C# / .NET (csharp-client and any C# web projects)
+################################################################################
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+Debug*/
+Release*/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+ipch/
+*.userosscache
+*.suo
+*.user
+*.userprefs
+*.sln.docstates
+
+# VS / Rider
+.vs/
+.idea/
+*.csproj.user
+*.rsuser
+_ReSharper.Caches/
+.ReSharper*/
+*.DotSettings.user
+*.ncrunchproject
+*.ncrunchsolution
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+**/project.lock.json
+**/project.fragment.lock.json
+.nuget/
+
+# ASP.NET / web
+App_Data/
+App_Data/*
+App_Browsers/
+App_Code/
+App_WebReferences/
+Generated_Code/
+wwwroot/dist/
+wwwroot/lib/
+wwwroot/node_modules/
+
+# Azure / IIS
+.publishsettings
+.csx/
+*.azurePubxml
+*.pubxml
+*.pubxml.user
+
+# Entity Framework
+Migrations/obj/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+################################################################################
+# PROJECT STRUCTURE SPECIFIC
+################################################################################
+
+# Root-level project artifacts
+/.env
+/.venv
+/.python_env
+/node_modules
+/coverage
+/dist
+/build
+
+# python-server specific
+/python-server/__pycache__/
+/python-server/.venv/
+/python-server/venv/
+/python-server/env/
+/python-server/.mypy_cache/
+/python-server/.pytest_cache/
+/python-server/build/
+/python-server/dist/
+/python-server/*.log
+/python-server/.coverage
+/python-server/htmlcov/
+
+# js-server specific
+/js-server/node_modules/
+/js-server/.next/
+/js-server/out/
+/js-server/dist/
+/js-server/build/
+/js-server/.nuxt/
+/js-server/.cache/
+/js-server/coverage/
+/js-server/npm-debug.log*
+/js-server/yarn-error.log*
+/js-server/pnpm-lock.yaml.backup
+
+# java-client specific
+/java-client/target/
+/java-client/build/
+/java-client/.gradle/
+/java-client/.classpath
+/java-client/.project
+/java-client/.settings/
+/java-client/*.iml
+/java-client/.idea/
+
+# csharp-client specific
+/csharp-client/bin/
+/csharp-client/obj/
+/csharp-client/.vs/
+/csharp-client/Logs/
+/csharp-client/*.user
+/csharp-client/*.suo
+/csharp-client/*.csproj.user
+/csharp-client/packages/
+/csharp-client/.idea/
+
+################################################################################
+# MISC / OPTIONAL
+################################################################################
+
+# Documentation builds
+/public/
+/_site/
+/docs/.vuepress/dist/
+/docs/_build/
+/docs/build/
+
+# Local tooling
+.husky/_/
+/.pre-commit-config.local.yaml
+.prettier-cache
+.eslintcache
+.stylelintcache
+
+# Backup / temp files
+*.bak
+*.orig
+*.rej
+*~
+*.swp
+*.swo
+*.tmp
