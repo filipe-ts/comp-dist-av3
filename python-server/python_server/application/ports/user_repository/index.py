@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from python_server.domain.entities.user import User
 
 
