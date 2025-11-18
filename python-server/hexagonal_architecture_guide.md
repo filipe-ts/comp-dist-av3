@@ -108,9 +108,11 @@ This port allows us to swap databases easily.
 Use cases orchestrate domain logic.
 
 **Example:** `get_user.py`
+
 ```python
-from application.ports.user_repository import UserRepository
-from domain.exceptions import UserNotFound
+from python_server.application.ports import UserRepository
+from python_server.domain.exceptions import UserNotFound
+
 
 async def get_user(user_id: int, repo: UserRepository):
     user = await repo.get_by_id(user_id)
@@ -140,9 +142,11 @@ Adapters implement the **Ports** from the application layer.
 Implements the `UserRepository` using Supabase/Postgres.
 
 **Example:** `supabase_user_repository.py`
+
 ```python
-from application.ports.user_repository import UserRepository
+from python_server.application.ports import UserRepository
 from supabase import create_client
+
 
 class SupabaseUserRepository(UserRepository):
     def __init__(self, client):
@@ -165,9 +169,11 @@ class SupabaseUserRepository(UserRepository):
 Contains the **GraphQL schemas**, **types**, and **resolvers**.
 
 **Example:** `schema.py`
+
 ```python
 import strawberry
-from application.use_cases.get_user import get_user
+from python_server.application.use_cases import get_user
+
 
 @strawberry.type
 class UserType:
@@ -175,11 +181,13 @@ class UserType:
     name: str
     email: str
 
+
 @strawberry.type
 class Query:
     async def user(self, id: int) -> UserType:
         repo = get_repo()  # Provided by DI
         return await get_user(id, repo)
+
 
 schema = strawberry.Schema(query=Query)
 ```
@@ -208,12 +216,13 @@ class UserService(ServiceBase):
 FastAPI routes and dependency injection.
 
 **Example:** `http_app.py`
+
 ```python
 from fastapi import FastAPI
 from strawberry.fastapi import GraphQLRouter
-from adapters.graphql.schema import schema
+from python_server.adapters.graphql import schema
 from starlette.middleware.wsgi import WSGIMiddleware
-from adapters.soap.soap_app import soap_application
+from python_server.adapters.soap import soap_application
 
 app = FastAPI()
 
@@ -248,8 +257,9 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 Application entrypoint.
 
 **Example:**
+
 ```python
-from adapters.http.http_app import app
+from python_server.adapters.http import app
 
 # This file is used by uvicorn:
 # uvicorn src.main:app --reload
