@@ -6,5 +6,5 @@ from pydantic import BaseModel
 class Song(BaseModel):
     id: int
     created_at: datetime
-    nome: str
-    artista: str
+    nome: str | None
+    artista: str | None

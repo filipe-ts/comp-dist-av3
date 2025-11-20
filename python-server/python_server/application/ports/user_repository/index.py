@@ -5,7 +5,7 @@ from python_server.domain.entities.user import User
 
 class IUserRepository(ABC):
     @abstractmethod
-    async def get_by_id(self, id_: int) -> User:
+    async def get_by_id(self, id_: int) -> User | None:
         pass
 
     @abstractmethod

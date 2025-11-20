@@ -5,7 +5,7 @@ from python_server.domain.entities.song import Song
 
 class ISongRepository(ABC):
     @abstractmethod
-    async def get_by_id(self, id_: int) -> Song:
+    async def get_by_id(self, id_: int) -> Song | None:
         pass
 
     @abstractmethod
