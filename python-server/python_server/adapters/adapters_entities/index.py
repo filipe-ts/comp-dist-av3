@@ -10,7 +10,12 @@ class IAdapterEntity(ABC):
         pass
 
 
+class PostgresSchema:
+    def __init__(self, schema: str) -> None:
+        self.schema_name: str = schema
+
+
 class IPostgresRepository(ABC):
-    def __init__(self, pool: AsyncConnectionPool, schema: str) -> None:
+    def __init__(self, pool: AsyncConnectionPool, schema: PostgresSchema) -> None:
         self.pool: AsyncConnectionPool = pool
-        self.schema: str = schema
+        self.schema: str = schema.schema_name

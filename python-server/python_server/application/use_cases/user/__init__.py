@@ -1,3 +1,3 @@
-from .index import get_user_by_id, get_users
+from .index import GetUserByIdUseCase, GetUsersUseCase
 
-__all__ = ["get_users", "get_user_by_id"]
+__all__ = ["GetUsersUseCase", "GetUserByIdUseCase"]
