@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package playlist_package;
+
+import "./user.proto";
+import "./music.proto";
+
+service PlaylistService {
+  rpc GetAllPlaylists (Empty) returns (PlaylistList);
+  rpc GetPlaylist (PlaylistId) returns (Playlist);
+  rpc GetSongsInPlaylist (PlaylistId) returns (MusicList);
+  rpc GetPlaylistsByUser (UserId) returns (PlaylistList);
+  rpc GetPlaylistsWithSong (MusicId) returns (PlaylistList);
+}
+
+message Empty {}
+
+message PlaylistId {
+  int32 id = 1;
+}
+
+message Playlist {
+  int32 id = 1;
+  string nome = 2;
+  int32 user_id = 3;
+}
+
+message PlaylistList {
+  repeated Playlist playlists = 1;
+}

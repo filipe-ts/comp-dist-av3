@@ -1,12 +1,11 @@
 const express = require('express');
-const { prisma_client } = require('../prisma_client');
+const { userService } = require('../services/user');
 
 const router = express.Router();
-const prisma = prisma_client();
 
 router.get('/', async (req, res) => {
   try {
-    const usuarios = await prisma.usuarios.findMany();
+    const usuarios = await userService.getAllUsers();
     res.json(usuarios);
   } catch (error) {
     console.error('Error fetching usuarios:', error);
@@ -17,9 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const usuarios = await prisma.usuarios.findUnique({
-    where: { id: parseInt(id, 10) },
-  });
+    const usuarios = await userService.getUserById(id);
     if (usuarios) {
       res.json(usuarios);
     } else {
@@ -34,9 +31,7 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/playlists', async (req, res) => {
   const { id } = req.params;
   try {
-    const playlists = await prisma.playlists.findMany({
-      where: { usuarioId: parseInt(id, 10) },
-    });
+    const playlists = await userService.getUserPlaylists(id);
     res.json(playlists);
   } catch (error) {
     console.error('Error fetching playlists for usuario:', error);
