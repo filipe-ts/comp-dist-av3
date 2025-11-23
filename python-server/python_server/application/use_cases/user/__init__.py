@@ -1,3 +1,3 @@
-from .index import GetUsersUseCase, GetUserByIdUseCase
+from .index import GetUserByIdUseCase, GetUsersUseCase
 
 __all__ = ["GetUsersUseCase", "GetUserByIdUseCase"]

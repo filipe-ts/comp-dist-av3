@@ -1,8 +1,14 @@
 from dataclasses import dataclass
 from datetime import datetime
+
 from psycopg.rows import class_row
 from psycopg_pool import AsyncConnectionPool
-from python_server.adapters.adapters_entities import IAdapterEntity, IPostgresRepository, PostgresSchema
+
+from python_server.adapters.adapters_entities import (
+    IAdapterEntity,
+    IPostgresRepository,
+    PostgresSchema,
+)
 from python_server.application.ports.song_repository import ISongRepository
 from python_server.domain.entities.song import Song
 

@@ -16,4 +16,3 @@ class GetUsersUseCase:
 
     async def __call__(self) -> list[User]:
         return await self.repo.get()
-

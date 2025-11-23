@@ -4,7 +4,11 @@ from datetime import datetime
 from psycopg.rows import class_row
 from psycopg_pool import AsyncConnectionPool
 
-from python_server.adapters.adapters_entities import IAdapterEntity, IPostgresRepository, PostgresSchema
+from python_server.adapters.adapters_entities import (
+    IAdapterEntity,
+    IPostgresRepository,
+    PostgresSchema,
+)
 from python_server.application.ports.playlist_repository import IPlaylistRepository
 from python_server.domain.entities.playlist import Playlist
 

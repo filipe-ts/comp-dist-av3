@@ -24,4 +24,3 @@ class GetSongsUseCase:
 
     async def __call__(self) -> list[Song]:
         return await self.repo.get()
-

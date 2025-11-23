@@ -1,4 +1,3 @@
-from .index import UserQuery, StrawberryUser
-
+from .index import StrawberryUser, UserQuery
 
 __all__ = ["UserQuery", "StrawberryUser"]

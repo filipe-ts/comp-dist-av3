@@ -81,6 +81,9 @@ exclude = [
     "^build/",
     "^dist/",
 ]
+plugins = [
+    "strawberry.ext.mypy_plugin"
+]
 mypy_path = ["."]
 # You can pin the main packages if you like:
 # packages = ["adapters", "application", "config", "domain"]

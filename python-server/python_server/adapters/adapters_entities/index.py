@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from psycopg_pool import AsyncConnectionPool
 from pydantic import BaseModel
 

@@ -1,3 +1,3 @@
-from .index import PostgresPlaylistRepository, PostgresPlaylist
+from .index import PostgresPlaylist, PostgresPlaylistRepository
 
 __all__ = ["PostgresPlaylistRepository", "PostgresPlaylist"]

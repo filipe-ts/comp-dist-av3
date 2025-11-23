@@ -1,20 +1,37 @@
 import punq
-from python_server.adapters.adapters_entities import PostgresSchema
-from python_server.adapters.db.Postgres.PostgresPlaylistRepository import PostgresPlaylistRepository
-from python_server.adapters.db.Postgres.PostgresSongRepository import PostgresSongRepository
-from python_server.adapters.db.Postgres.PostgresUserRepository import PostgresUserRepository
-from python_server.application.ports import IUserRepository, IPlaylistRepository, ISongRepository
-from python_server.application.use_cases.playlist import (
-    GetPlaylistsByUserIdUseCase,
-    GetPlaylistByIdUseCase,
-    GetPlaylistsBySongIdUseCase
-)
-from python_server.application.use_cases.song import GetSongsByIdUseCase, GetSongsUseCase, GetSongsByPlaylistIdUseCase
-from python_server.application.use_cases.user import GetUserByIdUseCase, GetUsersUseCase
 from psycopg_pool import AsyncConnectionPool
 
+from python_server.adapters.adapters_entities import PostgresSchema
+from python_server.adapters.db.Postgres.PostgresPlaylistRepository import (
+    PostgresPlaylistRepository,
+)
+from python_server.adapters.db.Postgres.PostgresSongRepository import (
+    PostgresSongRepository,
+)
+from python_server.adapters.db.Postgres.PostgresUserRepository import (
+    PostgresUserRepository,
+)
+from python_server.application.ports import (
+    IPlaylistRepository,
+    ISongRepository,
+    IUserRepository,
+)
+from python_server.application.use_cases.playlist import (
+    GetPlaylistByIdUseCase,
+    GetPlaylistsBySongIdUseCase,
+    GetPlaylistsByUserIdUseCase,
+)
+from python_server.application.use_cases.song import (
+    GetSongsByIdUseCase,
+    GetSongsByPlaylistIdUseCase,
+    GetSongsUseCase,
+)
+from python_server.application.use_cases.user import GetUserByIdUseCase, GetUsersUseCase
 
-def create_container(postgres_pool: AsyncConnectionPool, postgres_schema: PostgresSchema) -> punq.Container:
+
+def create_container(
+    postgres_pool: AsyncConnectionPool, postgres_schema: PostgresSchema
+) -> punq.Container:
     container = punq.Container()
     container.register(AsyncConnectionPool, instance=postgres_pool)
     container.register(PostgresSchema, instance=postgres_schema)
