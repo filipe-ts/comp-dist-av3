@@ -1,10 +1,8 @@
 from dataclasses import dataclass
 from datetime import datetime
-
 from psycopg.rows import class_row
 from psycopg_pool import AsyncConnectionPool
-
-from python_server.adapters.adapters_entities import IAdapterEntity, IPostgresRepository
+from python_server.adapters.adapters_entities import IAdapterEntity, IPostgresRepository, PostgresSchema
 from python_server.application.ports.song_repository import ISongRepository
 from python_server.domain.entities.song import Song
 
@@ -23,7 +21,7 @@ class PostgresSong(IAdapterEntity):
 
 
 class PostgresSongRepository(ISongRepository, IPostgresRepository):
-    def __init__(self, pool: AsyncConnectionPool, schema: str) -> None:
+    def __init__(self, pool: AsyncConnectionPool, schema: PostgresSchema) -> None:
         super().__init__(pool, schema)
 
     async def get(self) -> list[Song]:

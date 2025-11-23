@@ -4,7 +4,7 @@ from datetime import datetime
 from psycopg.rows import class_row
 from psycopg_pool import AsyncConnectionPool
 
-from python_server.adapters.adapters_entities import IAdapterEntity, IPostgresRepository
+from python_server.adapters.adapters_entities import IAdapterEntity, IPostgresRepository, PostgresSchema
 from python_server.application.ports.playlist_repository import IPlaylistRepository
 from python_server.domain.entities.playlist import Playlist
 
@@ -20,7 +20,7 @@ class PostgresPlaylist(IAdapterEntity):
 
 
 class PostgresPlaylistRepository(IPlaylistRepository, IPostgresRepository):
-    def __init__(self, pool: AsyncConnectionPool, schema: str) -> None:
+    def __init__(self, pool: AsyncConnectionPool, schema: PostgresSchema) -> None:
         super().__init__(pool, schema)
 
     async def get_by_id(self, id_: int) -> Playlist | None:

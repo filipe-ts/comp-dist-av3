@@ -2,19 +2,25 @@ from python_server.application.ports.playlist_repository import IPlaylistReposit
 from python_server.domain.entities.playlist import Playlist
 
 
-async def get_playlist_by_id(
-    playlist_repository: IPlaylistRepository, id_: int
-) -> Playlist | None:
-    return await playlist_repository.get_by_id(id_)
+class GetPlaylistByIdUseCase:
+    def __init__(self, repo: IPlaylistRepository):
+        self.repo = repo
+
+    async def __call__(self, id_: int) -> Playlist | None:
+        return await self.repo.get_by_id(id_)
 
 
-async def get_playlists_by_user_id(
-    playlist_repository: IPlaylistRepository, user_id: int
-) -> Playlist | None:
-    return await playlist_repository.get_by_user_id(user_id)
+class GetPlaylistsByUserIdUseCase:
+    def __init__(self, repo: IPlaylistRepository):
+        self.repo = repo
+
+    async def __call__(self, user_id: int) -> Playlist | None:
+        return await self.repo.get_by_user_id(user_id)
 
 
-async def get_playlists_by_song_id(
-    playlist_repository: IPlaylistRepository, song_id: int
-) -> list[Playlist]:
-    return await playlist_repository.get_by_song_id(song_id)
+class GetPlaylistsBySongIdUseCase:
+    def __init__(self, repo: IPlaylistRepository):
+        self.repo = repo
+
+    async def __call__(self, song_id: int) -> list[Playlist]:
+        return await self.repo.get_by_song_id(song_id)
