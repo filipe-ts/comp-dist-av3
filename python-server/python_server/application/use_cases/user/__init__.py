@@ -1,3 +1,13 @@
-from .index import GetUserByIdUseCase, GetUsersUseCase
+from .index import (
+    GetUserByIdUseCase,
+    GetUserByIdUseCaseSync,
+    GetUsersUseCase,
+    GetUsersUseCaseSync,
+)
 
-__all__ = ["GetUsersUseCase", "GetUserByIdUseCase"]
+__all__ = [
+    "GetUsersUseCase",
+    "GetUserByIdUseCase",
+    "GetUsersUseCaseSync",
+    "GetUserByIdUseCaseSync",
+]

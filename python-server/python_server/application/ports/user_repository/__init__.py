@@ -1,3 +1,3 @@
-from .index import IUserRepository
+from .index import IUserRepository, IUserRepositorySync
 
-__all__ = ["IUserRepository"]
+__all__ = ["IUserRepository", "IUserRepositorySync"]

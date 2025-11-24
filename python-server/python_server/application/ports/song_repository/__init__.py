@@ -1,3 +1,3 @@
-from .index import ISongRepository
+from .index import ISongRepository, ISongRepositorySync
 
-__all__ = ["ISongRepository"]
+__all__ = ["ISongRepository", "ISongRepositorySync"]

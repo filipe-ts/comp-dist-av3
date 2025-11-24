@@ -9,9 +9,23 @@ class IPlaylistRepository(ABC):
         pass
 
     @abstractmethod
-    async def get_by_user_id(self, user_id: int) -> Playlist | None:
+    async def get_by_user_id(self, user_id: int) -> list[Playlist]:
         pass
 
     @abstractmethod
     async def get_by_song_id(self, song_id: int) -> list[Playlist]:
+        pass
+
+
+class IPlaylistRepositorySync(ABC):
+    @abstractmethod
+    def get_by_id(self, id_: int) -> Playlist | None:
+        pass
+
+    @abstractmethod
+    def get_by_user_id(self, user_id: int) -> list[Playlist]:
+        pass
+
+    @abstractmethod
+    def get_by_song_id(self, song_id: int) -> list[Playlist]:
         pass

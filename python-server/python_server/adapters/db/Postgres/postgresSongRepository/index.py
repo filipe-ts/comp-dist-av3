@@ -2,19 +2,23 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from psycopg.rows import class_row
-from psycopg_pool import AsyncConnectionPool
+from psycopg_pool import AsyncConnectionPool, ConnectionPool
 
 from python_server.adapters.adapters_entities import (
-    IAdapterEntity,
     IPostgresRepository,
+    IPostgresRepositorySync,
+    IToDomain,
     PostgresSchema,
 )
-from python_server.application.ports.song_repository import ISongRepository
+from python_server.application.ports.song_repository import (
+    ISongRepository,
+    ISongRepositorySync,
+)
 from python_server.domain.entities.song import Song
 
 
 @dataclass
-class PostgresSong(IAdapterEntity):
+class PostgresSong(IToDomain):
     id: int
     created_at: datetime
     nome: str | None
@@ -77,4 +81,58 @@ class PostgresSongRepository(ISongRepository, IPostgresRepository):
             async with conn.cursor(row_factory=class_row(PostgresSong)) as cur:
                 await cur.execute(query, (playlist_id,))
                 rows: list[PostgresSong] = await cur.fetchall()
+                return [element.to_domain() for element in rows]
+
+
+class PostgresSongRepositorySync(ISongRepositorySync, IPostgresRepositorySync):
+    def __init__(self, pool: ConnectionPool, schema: PostgresSchema) -> None:
+        super().__init__(pool, schema)
+
+    def get(self) -> list[Song]:
+        query: str = f"""
+        SELECT
+            id, created_at, nome, artista
+        FROM
+            {self.schema}.musicas
+        """
+
+        with self.pool.connection() as conn:
+            with conn.cursor(row_factory=class_row(PostgresSong)) as cur:
+                cur.execute(query)
+                rows: list[PostgresSong] = cur.fetchall()
+                return [element.to_domain() for element in rows]
+
+    def get_by_id(self, id_: int) -> Song | None:
+        query: str = f"""
+                SELECT
+                    id, created_at, nome, artista
+                FROM
+                    {self.schema}.musicas
+                WHERE
+                    id = %s
+                """
+
+        with self.pool.connection() as conn:
+            with conn.cursor(row_factory=class_row(PostgresSong)) as cur:
+                cur.execute(query, (id_,))
+                row: PostgresSong | None = cur.fetchone()
+                return row.to_domain() if row else None
+
+    def get_by_playlist_id(self, playlist_id: int) -> list[Song]:
+        query: str = f"""
+        SELECT
+            m.id,
+            m.created_at,
+            m.nome,
+            m.artista
+        FROM {self.schema}.musica_em_playlist AS mp
+        LEFT JOIN {self.schema}.musicas AS m
+            ON mp.musica_id = m.id
+        WHERE mp.playlist_id = %s
+        """
+
+        with self.pool.connection() as conn:
+            with conn.cursor(row_factory=class_row(PostgresSong)) as cur:
+                cur.execute(query, (playlist_id,))
+                rows: list[PostgresSong] = cur.fetchall()
                 return [element.to_domain() for element in rows]

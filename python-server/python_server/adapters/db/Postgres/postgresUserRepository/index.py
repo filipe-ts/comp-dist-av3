@@ -2,24 +2,27 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from psycopg.rows import class_row
-from psycopg_pool import AsyncConnectionPool
+from psycopg_pool import AsyncConnectionPool, ConnectionPool
 
 from python_server.adapters.adapters_entities import (
-    IAdapterEntity,
     IPostgresRepository,
+    IPostgresRepositorySync,
+    IToDomain,
     PostgresSchema,
 )
-from python_server.application.ports.user_repository import IUserRepository
+from python_server.application.ports.user_repository import (
+    IUserRepository,
+    IUserRepositorySync,
+)
 from python_server.domain.entities.user import User
 
 
 @dataclass
-class PostgresUser(IAdapterEntity):
+class PostgresUser(IToDomain):
     id: int
     created_at: datetime
     nome: str | None
     idade: int | None
-    playlist_id: int | None
 
     def to_domain(self) -> User:
         return User(
@@ -27,7 +30,6 @@ class PostgresUser(IAdapterEntity):
             created_at=self.created_at,
             nome=self.nome,
             idade=self.idade,
-            playlist_id=self.playlist_id,
         )
 
 
@@ -38,7 +40,7 @@ class PostgresUserRepository(IUserRepository, IPostgresRepository):
     async def get_by_id(self, id_: int) -> User | None:
         query: str = f"""
         SELECT
-            id, created_at, nome, idade, playlist_id
+            id, created_at, nome, idade
         FROM
             {self.schema}.usuarios
         WHERE
@@ -54,7 +56,7 @@ class PostgresUserRepository(IUserRepository, IPostgresRepository):
     async def get(self) -> list[User]:
         query: str = f"""
         SELECT
-            id, created_at, nome, idade, playlist_id
+            id, created_at, nome, idade
         FROM
             {self.schema}.usuarios
         """
@@ -63,4 +65,39 @@ class PostgresUserRepository(IUserRepository, IPostgresRepository):
             async with conn.cursor(row_factory=class_row(PostgresUser)) as cur:
                 await cur.execute(query)
                 rows: list[PostgresUser] = await cur.fetchall()
+                return [element.to_domain() for element in rows]
+
+
+class PostgresUserRepositorySync(IUserRepositorySync, IPostgresRepositorySync):
+    def __init__(self, pool: ConnectionPool, schema: PostgresSchema) -> None:
+        super().__init__(pool, schema)
+
+    def get_by_id(self, id_: int) -> User | None:
+        query: str = f"""
+        SELECT
+            id, created_at, nome, idade
+        FROM
+            {self.schema}.usuarios
+        WHERE
+            id = %s
+        """
+
+        with self.pool.connection() as conn:
+            with conn.cursor(row_factory=class_row(PostgresUser)) as cur:
+                cur.execute(query, (id_,))
+                row: PostgresUser | None = cur.fetchone()
+                return row.to_domain() if row else None
+
+    def get(self) -> list[User]:
+        query: str = f"""
+        SELECT
+            id, created_at, nome, idade
+        FROM
+            {self.schema}.usuarios
+        """
+
+        with self.pool.connection() as conn:
+            with conn.cursor(row_factory=class_row(PostgresUser)) as cur:
+                cur.execute(query)
+                rows: list[PostgresUser] = cur.fetchall()
                 return [element.to_domain() for element in rows]
