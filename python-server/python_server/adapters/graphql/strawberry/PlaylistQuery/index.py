@@ -17,10 +17,16 @@ class StrawberryPlaylist:
     id: int
     created_at: datetime
     nome: str | None
+    usuario_id: int
 
     @classmethod
     def from_domain(cls, playlist: Playlist) -> "StrawberryPlaylist":
-        return cls(id=playlist.id, created_at=playlist.created_at, nome=playlist.nome)
+        return cls(
+            id=playlist.id,
+            created_at=playlist.created_at,
+            nome=playlist.nome,
+            usuario_id=playlist.usuario_id,
+        )
 
 
 @strawberry.type
@@ -30,12 +36,12 @@ class PlaylistQuery:
     )  # type: ignore[misc]
     async def get_playlist_by_user_id(
         self, info: Info[GraphQLContext], user_id: int
-    ) -> StrawberryPlaylist | None:
+    ) -> list[StrawberryPlaylist]:
         use_case: GetPlaylistsByUserIdUseCase = info.context.container.resolve(
             GetPlaylistsByUserIdUseCase
         )
-        playlist: Playlist | None = await use_case(user_id)
-        return StrawberryPlaylist.from_domain(playlist) if playlist else None
+        playlists: list[Playlist] = await use_case(user_id)
+        return [StrawberryPlaylist.from_domain(playlist) for playlist in playlists]
 
     @strawberry.field(
         name="getPlaylistsBySongId", description="Get all playlists by a song id"

@@ -1,3 +1,15 @@
-from .index import IAdapterEntity, IPostgresRepository, PostgresSchema
+from .index import (
+    IFromDomain,
+    IPostgresRepository,
+    IPostgresRepositorySync,
+    IToDomain,
+    PostgresSchema,
+)
 
-__all__ = ["IAdapterEntity", "IPostgresRepository", "PostgresSchema"]
+__all__ = [
+    "IToDomain",
+    "IPostgresRepository",
+    "IPostgresRepositorySync",
+    "PostgresSchema",
+    "IFromDomain",
+]

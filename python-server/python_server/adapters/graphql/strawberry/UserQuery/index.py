@@ -14,7 +14,6 @@ class StrawberryUser:
     created_at: datetime
     nome: str | None
     idade: int | None
-    playlist_id: int | None
 
     @classmethod
     def from_domain(cls, user: User) -> "StrawberryUser":
@@ -23,7 +22,6 @@ class StrawberryUser:
             created_at=user.created_at,
             nome=user.nome,
             idade=user.idade,
-            playlist_id=user.playlist_id,
         )
 
 

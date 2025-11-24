@@ -1,3 +1,17 @@
-from .index import GetSongsByIdUseCase, GetSongsByPlaylistIdUseCase, GetSongsUseCase
+from .index import (
+    GetSongsByIdUseCase,
+    GetSongsByIdUseCaseSync,
+    GetSongsByPlaylistIdUseCase,
+    GetSongsByPlaylistIdUseCaseSync,
+    GetSongsUseCase,
+    GetSongsUseCaseSync,
+)
 
-__all__ = ["GetSongsUseCase", "GetSongsByIdUseCase", "GetSongsByPlaylistIdUseCase"]
+__all__ = [
+    "GetSongsUseCase",
+    "GetSongsByIdUseCase",
+    "GetSongsByPlaylistIdUseCase",
+    "GetSongsUseCaseSync",
+    "GetSongsByIdUseCaseSync",
+    "GetSongsByPlaylistIdUseCaseSync",
+]

@@ -8,4 +8,3 @@ class User(BaseModel):
     created_at: datetime
     nome: str | None
     idade: int | None
-    playlist_id: int | None

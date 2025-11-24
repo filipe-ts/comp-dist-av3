@@ -1,4 +1,7 @@
-from python_server.application.ports.song_repository import ISongRepository
+from python_server.application.ports.song_repository import (
+    ISongRepository,
+    ISongRepositorySync,
+)
 from python_server.domain.entities.song import Song
 
 
@@ -24,3 +27,27 @@ class GetSongsUseCase:
 
     async def __call__(self) -> list[Song]:
         return await self.repo.get()
+
+
+class GetSongsByIdUseCaseSync:
+    def __init__(self, repo: ISongRepositorySync) -> None:
+        self.repo = repo
+
+    def __call__(self, id_: int) -> Song | None:
+        return self.repo.get_by_id(id_)
+
+
+class GetSongsByPlaylistIdUseCaseSync:
+    def __init__(self, repo: ISongRepositorySync) -> None:
+        self.repo = repo
+
+    def __call__(self, playlist_id: int) -> list[Song]:
+        return self.repo.get_by_playlist_id(playlist_id)
+
+
+class GetSongsUseCaseSync:
+    def __init__(self, repo: ISongRepositorySync) -> None:
+        self.repo = repo
+
+    def __call__(self) -> list[Song]:
+        return self.repo.get()
