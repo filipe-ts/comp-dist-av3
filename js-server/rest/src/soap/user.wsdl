@@ -1,0 +1,84 @@
+<definitions name="UserService"
+  targetNamespace="http://www.examples.com/wsdl/UserService.wsdl"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="http://www.examples.com/wsdl/UserService.wsdl"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <types>
+    <xsd:schema targetNamespace="http://www.examples.com/wsdl/UserService.wsdl">
+      <xsd:element name="GetUserRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="UserResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+            <xsd:element name="nome" type="xsd:string"/>
+            <xsd:element name="idade" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetAllUsersRequest">
+        <xsd:complexType>
+          <xsd:sequence></xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetAllUsersResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="users" type="tns:UserResponse" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <message name="GetUserInput">
+    <part name="body" element="tns:GetUserRequest"/>
+  </message>
+  <message name="GetUserOutput">
+    <part name="body" element="tns:UserResponse"/>
+  </message>
+  <message name="GetAllUsersInput">
+    <part name="body" element="tns:GetAllUsersRequest"/>
+  </message>
+  <message name="GetAllUsersOutput">
+    <part name="body" element="tns:GetAllUsersResponse"/>
+  </message>
+
+  <portType name="UserPortType">
+    <operation name="GetUser">
+      <input message="tns:GetUserInput"/>
+      <output message="tns:GetUserOutput"/>
+    </operation>
+    <operation name="GetAllUsers">
+      <input message="tns:GetAllUsersInput"/>
+      <output message="tns:GetAllUsersOutput"/>
+    </operation>
+  </portType>
+
+  <binding name="UserBinding" type="tns:UserPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetUser">
+      <soap:operation soapAction="GetUser"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="GetAllUsers">
+      <soap:operation soapAction="GetAllUsers"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+  </binding>
+
+  <service name="UserService">
+    <port name="UserPort" binding="tns:UserBinding">
+      <soap:address location="http://localhost:8000/soap"/>
+    </port>
+  </service>
+</definitions>

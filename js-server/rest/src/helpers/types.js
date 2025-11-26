@@ -1,4 +1,4 @@
-const toGrpc = (data) => {
+const convertTypes = (data) => {
     if (!data) return null;
     return {
         ...data,
@@ -7,5 +7,5 @@ const toGrpc = (data) => {
 };
 
 module.exports = {
-    toGrpc,
+    convertTypes,
 };
