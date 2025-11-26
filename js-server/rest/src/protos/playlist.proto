@@ -22,7 +22,7 @@ message PlaylistId {
 message Playlist {
   int32 id = 1;
   string nome = 2;
-  int32 user_id = 3;
+  int32 usuario_id = 3;
 }
 
 message PlaylistList {

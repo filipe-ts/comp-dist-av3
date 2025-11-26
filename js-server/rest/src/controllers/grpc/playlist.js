@@ -1,6 +1,5 @@
 const grpc = require('@grpc/grpc-js');
 const { playlistService } = require('../../services/playlist');
-const { toGrpc } = require('../../helpers/types');
 
 const handleError = (err, callback) => {
 //   if (err.message === 'USER_NOT_FOUND') {
@@ -21,11 +20,20 @@ const handleError = (err, callback) => {
   });
 };
 
+const convertTypes = (data) => {
+    if (!data) return null;
+    return {
+        ...data,
+        id: Number(data.id),
+        usuario_id: Number(data.usuario_id),
+    }
+}
+
 const implementation = {
     GetAllPlaylists: async (call, callback) => {
         try {
             const playlists = await playlistService.getAllPlaylists();
-            callback(null, { playlists: playlists.map(toGrpc) });
+            callback(null, { playlists: playlists.map(convertTypes) });
         } catch (err) {
             handleError(err, callback);
         }
@@ -34,7 +42,7 @@ const implementation = {
     GetPlaylist: async (call, callback) => {
         try {
             const playlist = await playlistService.getPlaylistById(call.request.id);
-            callback(null, { ...toGrpc(playlist) });
+            callback(null, { ...convertTypes(playlist) });
         } catch (err) {
             handleError(err, callback);
         }
@@ -43,7 +51,7 @@ const implementation = {
     GetSongsInPlaylist: async (call, callback) => {
         try {
             const songs = await playlistService.getSongsInPlaylist(call.request.id);
-            callback(null, { musics: songs.map(toGrpc) });
+            callback(null, { musics: songs.map(convertTypes) });
         } catch (err) {
             handleError(err, callback);
         }
@@ -51,8 +59,8 @@ const implementation = {
 
     GetPlaylistsByUser: async (call, callback) => {
         try {
-            const playlists = await playlistService.getPlaylistByUserId(call.request.userId);
-            callback(null, { playlists: playlists.map(toGrpc) });
+            const playlists = await playlistService.getPlaylistByUserId(call.request.id);
+            callback(null, { playlists: playlists.map(convertTypes) });
         } catch (err) {
             handleError(err, callback);
         }
@@ -60,8 +68,8 @@ const implementation = {
 
     GetPlaylistsWithSong: async (call, callback) => {
         try {
-            const playlists = await playlistService.getPlaylistsWithSong(call.request.songId);
-            callback(null, { playlists: playlists.map(toGrpc) });
+            const playlists = await playlistService.getPlaylistsWithSong(call.request.id);
+            callback(null, { playlists: playlists.map(convertTypes) });
         } catch (err) {
             handleError(err, callback);
         }
