@@ -1,5 +1,6 @@
 const express = require('express');
 const soap = require('soap');
+const { graphqlHTTP } = require('express-graphql');
 const fs = require('fs');
 
 const usuariosController = require('./controllers/user');
@@ -32,6 +33,25 @@ const musicControllerSoap = require('./controllers/soap/music');
 
 const playlistWsdl = fs.readFileSync('./soap/playlist.wsdl', 'utf8');
 const playlistControllerSoap = require('./controllers/soap/playlist');
+
+// GraphQL
+const schema = require('./graphql/schema');
+
+const userResolvers = require('./controllers/graphql/user');
+const musicResolvers = require('./controllers/graphql/music');
+const playlistResolvers = require('./controllers/graphql/playlist');
+
+const rootResolver = {
+  ...userResolvers,
+  ...musicResolvers,
+  ...playlistResolvers,
+};
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: rootResolver,
+  graphiql: true,
+}));
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
