@@ -1,17 +1,16 @@
 syntax = "proto3";
 
 package playlist_package;
+
 import "google/protobuf/timestamp.proto";
 
-import "./user.proto";
-import "./music.proto";
+import "user.proto";
+import "song.proto";
 
 service PlaylistService {
-  rpc GetAllPlaylists (Empty) returns (PlaylistList);
   rpc GetPlaylist (PlaylistId) returns (Playlist);
-  rpc GetSongsInPlaylist (PlaylistId) returns (MusicList);
-  rpc GetPlaylistsByUser (UserId) returns (PlaylistList);
-  rpc GetPlaylistsWithSong (MusicId) returns (PlaylistList);
+  rpc GetPlaylistsByUser (user_package.UserId) returns (PlaylistList);
+  rpc GetPlaylistsBySongId (song_package.SongId) returns (PlaylistList);
 }
 
 message Empty {}
@@ -22,8 +21,9 @@ message PlaylistId {
 
 message Playlist {
   int32 id = 1;
-  string nome = 2;
-  int32 usuario_id = 3;
+  google.protobuf.Timestamp created_at = 2;
+  string nome = 3;
+  int32 usuario_id = 4;
 }
 
 message PlaylistList {

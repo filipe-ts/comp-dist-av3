@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package user_package;
+
+import "google/protobuf/timestamp.proto";
+
+service UserService {
+  rpc GetAllUsers (Empty) returns (UserList);
+  rpc GetUser (UserId) returns (User);
+}
+
+message Empty {}
+
+message UserId {
+  int32 id = 1;
+}
+
+message User {
+  int32 id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  string nome = 3;
+  int32 idade = 4;
+}
+
+message UserList {
+  repeated User users = 1;
+}
