@@ -1,5 +1,5 @@
-import playlist_pb2
-import playlist_pb2_grpc
+from . import playlist_pb2
+from . import playlist_pb2_grpc
 from python_server.domain.entities import Playlist as DomainPlaylist
 from python_server.application.use_cases.playlist import GetPlaylistByIdUseCaseSync, GetPlaylistsByUserIdUseCaseSync, GetPlaylistsBySongIdUseCaseSync
 from google.protobuf.timestamp_pb2 import Timestamp
@@ -19,7 +19,8 @@ class GrpcPlaylistHelper:
         return playlist_pb2.Playlist(
             id=playlist.id,
             created_at=GrpcPlaylistHelper.timestamp_from_datetime(playlist.created_at),
-            nome=playlist.nome
+            nome=playlist.nome,
+            usuario_id=playlist.usuario_id
         )
 
 
@@ -44,7 +45,7 @@ class GrpcPlaylistService(playlist_pb2_grpc.PlaylistServiceServicer):
 
     def GetPlaylistsBySongId(self, request, context) -> playlist_pb2.PlaylistList:
         get_playlists_by_song_id_use_case: GetPlaylistsBySongIdUseCaseSync = self.container.resolve(GetPlaylistsBySongIdUseCaseSync)
-        playlists: list[DomainPlaylist] = get_playlists_by_song_id_use_case(request.song_id)
+        playlists: list[DomainPlaylist] = get_playlists_by_song_id_use_case(request.id)
         return playlist_pb2.PlaylistList(
             playlists=[
                 GrpcPlaylistHelper.from_domain(playlist)

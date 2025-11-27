@@ -23,9 +23,8 @@ _sym_db = _symbol_database.Default()
 
 
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
-import user_pb2 as user__pb2
-import song_pb2 as song__pb2
-
+from python_server.adapters.grpc.grpcio.grpcSongService import song_pb2 as song__pb2
+from python_server.adapters.grpc.grpcio.grpcUserService import user_pb2 as user__pb2
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0eplaylist.proto\x12\x10playlist_package\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\nuser.proto\x1a\nsong.proto\"\x07\n\x05\x45mpty\"\x18\n\nPlaylistId\x12\n\n\x02id\x18\x01 \x01(\x05\"h\n\x08Playlist\x12\n\n\x02id\x18\x01 \x01(\x05\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04nome\x18\x03 \x01(\t\x12\x12\n\nusuario_id\x18\x04 \x01(\x05\"=\n\x0cPlaylistList\x12-\n\tplaylists\x18\x01 \x03(\x0b\x32\x1a.playlist_package.Playlist2\xf4\x01\n\x0fPlaylistService\x12G\n\x0bGetPlaylist\x12\x1c.playlist_package.PlaylistId\x1a\x1a.playlist_package.Playlist\x12J\n\x12GetPlaylistsByUser\x12\x14.user_package.UserId\x1a\x1e.playlist_package.PlaylistList\x12L\n\x14GetPlaylistsBySongId\x12\x14.song_package.SongId\x1a\x1e.playlist_package.PlaylistListb\x06proto3')
 

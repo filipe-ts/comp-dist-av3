@@ -1,5 +1,5 @@
-import song_pb2
-import song_pb2_grpc
+from . import song_pb2
+from . import song_pb2_grpc
 from python_server.domain.entities import Song as DomainSong
 from python_server.application.use_cases.song import (
     GetSongsByIdUseCaseSync,
@@ -50,7 +50,7 @@ class GrpcSongService(song_pb2_grpc.SongServiceServicer):
 
     def GetSongByPlaylistId(self, request, context) -> song_pb2.SongList:
         get_songs_by_playlist_id_use_case: GetSongsByPlaylistIdUseCaseSync = self.container.resolve(GetSongsByPlaylistIdUseCaseSync)
-        songs: list[DomainSong] = get_songs_by_playlist_id_use_case(request.playlist_id)
+        songs: list[DomainSong] = get_songs_by_playlist_id_use_case(request.id)
         return song_pb2.SongList(
             songs=
             [

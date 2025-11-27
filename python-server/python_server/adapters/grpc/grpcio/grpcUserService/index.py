@@ -1,5 +1,5 @@
-import user_pb2
-import user_pb2_grpc
+from . import user_pb2
+from . import user_pb2_grpc
 from python_server.application.use_cases.user import GetUserByIdUseCaseSync, GetUsersUseCaseSync
 from python_server.domain.entities import User as DomainUser
 from google.protobuf.timestamp_pb2 import Timestamp

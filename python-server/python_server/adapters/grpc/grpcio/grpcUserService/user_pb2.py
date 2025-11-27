@@ -22,23 +22,24 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nuser.proto\x12\x0cuser_package\"\x07\n\x05\x45mpty\"\x14\n\x06UserId\x12\n\n\x02id\x18\x01 \x01(\x05\"/\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04nome\x18\x02 \x01(\t\x12\r\n\x05idade\x18\x03 \x01(\x05\"-\n\x08UserList\x12!\n\x05users\x18\x01 \x03(\x0b\x32\x12.user_package.User2~\n\x0bUserService\x12:\n\x0bGetAllUsers\x12\x13.user_package.Empty\x1a\x16.user_package.UserList\x12\x33\n\x07GetUser\x12\x14.user_package.UserId\x1a\x12.user_package.Userb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nuser.proto\x12\x0cuser_package\x1a\x1fgoogle/protobuf/timestamp.proto\"\x07\n\x05\x45mpty\"\x14\n\x06UserId\x12\n\n\x02id\x18\x01 \x01(\x05\"_\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04nome\x18\x03 \x01(\t\x12\r\n\x05idade\x18\x04 \x01(\x05\"-\n\x08UserList\x12!\n\x05users\x18\x01 \x03(\x0b\x32\x12.user_package.User2~\n\x0bUserService\x12:\n\x0bGetAllUsers\x12\x13.user_package.Empty\x1a\x16.user_package.UserList\x12\x33\n\x07GetUser\x12\x14.user_package.UserId\x1a\x12.user_package.Userb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'user_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_EMPTY']._serialized_start=28
-  _globals['_EMPTY']._serialized_end=35
-  _globals['_USERID']._serialized_start=37
-  _globals['_USERID']._serialized_end=57
-  _globals['_USER']._serialized_start=59
-  _globals['_USER']._serialized_end=106
-  _globals['_USERLIST']._serialized_start=108
-  _globals['_USERLIST']._serialized_end=153
-  _globals['_USERSERVICE']._serialized_start=155
-  _globals['_USERSERVICE']._serialized_end=281
+  _globals['_EMPTY']._serialized_start=61
+  _globals['_EMPTY']._serialized_end=68
+  _globals['_USERID']._serialized_start=70
+  _globals['_USERID']._serialized_end=90
+  _globals['_USER']._serialized_start=92
+  _globals['_USER']._serialized_end=187
+  _globals['_USERLIST']._serialized_start=189
+  _globals['_USERLIST']._serialized_end=234
+  _globals['_USERSERVICE']._serialized_start=236
+  _globals['_USERSERVICE']._serialized_end=362
 # @@protoc_insertion_point(module_scope)

@@ -2,10 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 import warnings
-
-import playlist_pb2 as playlist__pb2
-import song_pb2 as song__pb2
-import user_pb2 as user__pb2
+from . import playlist_pb2 as playlist__pb2
+from python_server.adapters.grpc.grpcio.grpcSongService import song_pb2 as song__pb2
+from python_server.adapters.grpc.grpcio.grpcUserService import user_pb2 as user__pb2
 
 GRPC_GENERATED_VERSION = '1.76.0'
 GRPC_VERSION = grpc.__version__
