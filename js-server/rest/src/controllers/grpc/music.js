@@ -1,6 +1,6 @@
 const grpc = require('@grpc/grpc-js');
 const { musicService } = require('../../services/music');
-const { toGrpc } = require('../../helpers/types');
+const { convertTypes } = require('../../helpers/types');
 
 const handleError = (err, callback) => {
 //   if (err.message === 'USER_NOT_FOUND') {
@@ -26,7 +26,7 @@ const implementation = {
         try {
             const music = await musicService.getAllMusic();
             console.log(music);
-            callback(null, { musics: music.map(toGrpc) });
+            callback(null, { musics: music.map(convertTypes) });
         } catch (err) {
             handleError(err, callback);
         }
@@ -35,7 +35,7 @@ const implementation = {
     GetMusic: async (call, callback) => {
         try {
             const music = await musicService.getMusicById(call.request.id);
-            callback(null, { ...toGrpc(music) });
+            callback(null, { ...convertTypes(music) });
         } catch (err) {
             handleError(err, callback);
         }

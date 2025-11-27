@@ -1,0 +1,185 @@
+<definitions name="PlaylistService"
+  targetNamespace="http://www.examples.com/wsdl/PlaylistService.wsdl"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="http://www.examples.com/wsdl/PlaylistService.wsdl"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <types>
+    <xsd:schema targetNamespace="http://www.examples.com/wsdl/PlaylistService.wsdl">
+      <!-- Request and Response for GetPlaylist -->
+      <xsd:element name="GetPlaylistRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="PlaylistResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="description" type="xsd:string"/>
+            <xsd:element name="userId" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Request and Response for GetAllPlaylists -->
+      <xsd:element name="GetAllPlaylistsRequest">
+        <xsd:complexType>
+          <xsd:sequence></xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetAllPlaylistsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="playlists" type="tns:PlaylistResponse" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Request and Response for GetSongsInPlaylist -->
+      <xsd:element name="GetSongsInPlaylistRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetSongsInPlaylistResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="musics" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Request and Response for GetPlaylistsByUser -->
+      <xsd:element name="GetPlaylistsByUserRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="userId" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPlaylistsByUserResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="playlists" type="tns:PlaylistResponse" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Request and Response for GetPlaylistsWithSong -->
+      <xsd:element name="GetPlaylistsWithSongRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="songId" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GetPlaylistsWithSongResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="playlists" type="tns:PlaylistResponse" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <!-- Messages -->
+  <message name="GetPlaylistInput">
+    <part name="body" element="tns:GetPlaylistRequest"/>
+  </message>
+  <message name="GetPlaylistOutput">
+    <part name="body" element="tns:PlaylistResponse"/>
+  </message>
+  <message name="GetAllPlaylistsInput">
+    <part name="body" element="tns:GetAllPlaylistsRequest"/>
+  </message>
+  <message name="GetAllPlaylistsOutput">
+    <part name="body" element="tns:GetAllPlaylistsResponse"/>
+  </message>
+  <message name="GetSongsInPlaylistInput">
+    <part name="body" element="tns:GetSongsInPlaylistRequest"/>
+  </message>
+  <message name="GetSongsInPlaylistOutput">
+    <part name="body" element="tns:GetSongsInPlaylistResponse"/>
+  </message>
+  <message name="GetPlaylistsByUserInput">
+    <part name="body" element="tns:GetPlaylistsByUserRequest"/>
+  </message>
+  <message name="GetPlaylistsByUserOutput">
+    <part name="body" element="tns:GetPlaylistsByUserResponse"/>
+  </message>
+  <message name="GetPlaylistsWithSongInput">
+    <part name="body" element="tns:GetPlaylistsWithSongRequest"/>
+  </message>
+  <message name="GetPlaylistsWithSongOutput">
+    <part name="body" element="tns:GetPlaylistsWithSongResponse"/>
+  </message>
+
+  <!-- Port Type -->
+  <portType name="PlaylistPortType">
+    <operation name="GetPlaylist">
+      <input message="tns:GetPlaylistInput"/>
+      <output message="tns:GetPlaylistOutput"/>
+    </operation>
+    <operation name="GetAllPlaylists">
+      <input message="tns:GetAllPlaylistsInput"/>
+      <output message="tns:GetAllPlaylistsOutput"/>
+    </operation>
+    <operation name="GetSongsInPlaylist">
+      <input message="tns:GetSongsInPlaylistInput"/>
+      <output message="tns:GetSongsInPlaylistOutput"/>
+    </operation>
+    <operation name="GetPlaylistsByUser">
+      <input message="tns:GetPlaylistsByUserInput"/>
+      <output message="tns:GetPlaylistsByUserOutput"/>
+    </operation>
+    <operation name="GetPlaylistsWithSong">
+      <input message="tns:GetPlaylistsWithSongInput"/>
+      <output message="tns:GetPlaylistsWithSongOutput"/>
+    </operation>
+  </portType>
+
+  <!-- Binding -->
+  <binding name="PlaylistBinding" type="tns:PlaylistPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetPlaylist">
+      <soap:operation soapAction="GetPlaylist"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="GetAllPlaylists">
+      <soap:operation soapAction="GetAllPlaylists"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="GetSongsInPlaylist">
+      <soap:operation soapAction="GetSongsInPlaylist"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="GetPlaylistsByUser">
+      <soap:operation soapAction="GetPlaylistsByUser"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="GetPlaylistsWithSong">
+      <soap:operation soapAction="GetPlaylistsWithSong"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+  </binding>
+
+  <!-- Service -->
+  <service name="PlaylistService">
+    <port name="PlaylistPort" binding="tns:PlaylistBinding">
+      <soap:address location="http://localhost:8000/soap"/>
+    </port>
+  </service>
+</definitions>

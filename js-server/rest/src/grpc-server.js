@@ -29,7 +29,6 @@ const packageDefinition = {
   }),
 };
 
-// const playlistProto = grpc.loadPackageDefinition(packageDefinition).playlist_package;
 const userProto = grpc.loadPackageDefinition(packageDefinition.user).user_package;
 const musicProto = grpc.loadPackageDefinition(packageDefinition.music).music_package;
 const playlistProto = grpc.loadPackageDefinition(packageDefinition.playlist).playlist_package;

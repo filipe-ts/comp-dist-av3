@@ -1,6 +1,6 @@
 const grpc = require('@grpc/grpc-js');
 const { userService } = require('../../services/user');
-const { toGrpc } = require('../../helpers/types');
+const { convertTypes } = require('../../helpers/types');
 
 const handleError = (err, callback) => {
 //   if (err.message === 'USER_NOT_FOUND') {
@@ -25,7 +25,7 @@ const implementation = {
   GetAllUsers: async (call, callback) => {
     try {
       const users = await userService.getAllUsers();
-      callback(null, { users: users.map(toGrpc) });
+      callback(null, { users: users.map(convertTypes) });
     } catch (err) {
       handleError(err, callback);
     }
@@ -34,7 +34,7 @@ const implementation = {
   GetUser: async (call, callback) => {
     try {
       const user = await userService.getUserById(call.request.id);
-      callback(null, { ...toGrpc(user) });
+      callback(null, { ...convertTypes(user) });
     } catch (err) {
       handleError(err, callback);
     }

@@ -1,0 +1,88 @@
+<definitions name="MusicService"
+  targetNamespace="http://www.examples.com/wsdl/MusicService.wsdl"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="http://www.examples.com/wsdl/MusicService.wsdl"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <types>
+    <xsd:schema targetNamespace="http://www.examples.com/wsdl/MusicService.wsdl">
+      <xsd:element name="GetMusicRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="MusicResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+            <xsd:element name="nome" type="xsd:string"/>
+            <xsd:element name="artista" type="xsd:string"/>
+            <xsd:element name="created_at" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetAllMusicRequest">
+        <xsd:complexType>
+          <xsd:sequence></xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetAllMusicResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="musics" type="tns:MusicResponse" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+
+  <message name="GetMusicInput">
+    <part name="body" element="tns:GetMusicRequest"/>
+  </message>
+  <message name="GetMusicOutput">
+    <part name="body" element="tns:MusicResponse"/>
+  </message>
+  <message name="GetAllMusicInput">
+    <part name="body" element="tns:GetAllMusicRequest"/>
+  </message>
+  <message name="GetAllMusicOutput">
+    <part name="body" element="tns:GetAllMusicResponse"/>
+  </message>
+
+  <portType name="MusicPortType">
+    <operation name="GetMusic">
+      <input message="tns:GetMusicInput"/>
+      <output message="tns:GetMusicOutput"/>
+    </operation>
+    <operation name="GetAllMusic">
+      <input message="tns:GetAllMusicInput"/>
+      <output message="tns:GetAllMusicOutput"/>
+    </operation>
+  </portType>
+
+  <binding name="MusicBinding" type="tns:MusicPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetMusic">
+      <soap:operation soapAction="GetMusic"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+    <operation name="GetAllMusic">
+      <soap:operation soapAction="GetAllMusic"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+  </binding>
+
+  <service name="MusicService">
+    <port name="MusicPort" binding="tns:MusicBinding">
+      <soap:address location="http://localhost:8000/soap"/>
+    </port>
+  </service>
+</definitions>
