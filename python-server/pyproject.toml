@@ -21,7 +21,9 @@ dependencies = [
     "lxml (>=6.0.2,<7.0.0)",
     "defusedxml (>=0.7.1,<0.8.0)",
     "punq (>=0.7.0,<0.8.0)",
-    "psycopg-pool (>=3.2.7,<4.0.0)"
+    "psycopg-pool (>=3.2.7,<4.0.0)",
+    "grpcio (>=1.76.0,<2.0.0)",
+    "grpcio-tools (>=1.76.0,<2.0.0)"
 ]
 
 
