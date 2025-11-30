@@ -92,14 +92,14 @@ class GraphQLUser(HttpUser):
     def get_users(self):
         self.post_graphql(
             query=Q_GET_USERS,
-            operation_name="GetAllUsers"
+            operation_name="GetUsers"
         )
 
     @task
     def get_musics(self):
         self.post_graphql(
             query=Q_GET_MUSICS,
-            operation_name="GetAllMusics"
+            operation_name="GetSongs"
         )
 
     @task
