@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package playlist_package;
+
+import "google/protobuf/timestamp.proto";
+
+import "user.proto";
+import "song.proto";
+
+service PlaylistService {
+  rpc GetPlaylist (PlaylistId) returns (Playlist);
+  rpc GetPlaylistsByUser (user_package.UserId) returns (PlaylistList);
+  rpc GetPlaylistsBySongId (song_package.SongId) returns (PlaylistList);
+}
+
+message Empty {}
+
+message PlaylistId {
+  int32 id = 1;
+}
+
+message Playlist {
+  int32 id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  string nome = 3;
+  int32 usuario_id = 4;
+}
+
+message PlaylistList {
+  repeated Playlist playlists = 1;
+}

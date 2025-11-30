@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:usr="http://localhost:8000/soap/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <usr:get_songs_by_playlist_id>
+         <usr:playlist_id>{{playlist_id}}
+         </usr:playlist_id>
+      </usr:get_songs_by_playlist_id>
+   </soapenv:Body>
+</soapenv:Envelope>

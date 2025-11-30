@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package song_package;
+
+import "google/protobuf/timestamp.proto";
+
+service SongService {
+  rpc GetAllSong (Empty) returns (SongList);
+  rpc GetSong (SongId) returns (Song);
+  rpc GetSongByPlaylistId (PlaylistId) returns (SongList);
+}
+
+message Empty {}
+
+message SongId {
+  int32 id = 1;
+}
+
+message PlaylistId {
+  int32 id = 1;
+}
+
+message Song {
+  int32 id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  string nome = 3;
+  string artista = 4;
+}
+
+message SongList {
+  repeated Song songs = 1;
+}

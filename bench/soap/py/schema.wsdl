@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:plink="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    xmlns:wsdlsoap11="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdlsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap11enc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:soap11env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:soap12env="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:soap12enc="http://www.w3.org/2003/05/soap-encoding"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2003/03/addressing"
+    xmlns:xop="http://www.w3.org/2004/08/xop/include"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://localhost:8000/soap/"
+    xmlns:s0="python_server.adapters.soap.spynePlaylistService.index"
+    xmlns:s1="python_server.adapters.soap.spyneSongService.index"
+    xmlns:s2="python_server.adapters.soap.spyneUserService.index"
+    targetNamespace="http://localhost:8000/soap/" name="Application">
+    <wsdl:types>
+        <xs:schema targetNamespace="http://localhost:8000/soap/" elementFormDefault="qualified">
+            <xs:import namespace="python_server.adapters.soap.spyneSongService.index" />
+            <xs:import namespace="python_server.adapters.soap.spyneUserService.index" />
+            <xs:import namespace="python_server.adapters.soap.spynePlaylistService.index" />
+            <xs:complexType name="get_songs" />
+            <xs:complexType name="get_users" />
+            <xs:complexType name="get_playlist_by_id">
+                <xs:sequence>
+                    <xs:element name="id_" type="xs:integer" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_playlist_by_idResponse">
+                <xs:sequence>
+                    <xs:element name="get_playlist_by_idResult" type="s0:SpynePlaylist"
+                        minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_playlists_by_song_id">
+                <xs:sequence>
+                    <xs:element name="song_id" type="xs:integer" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_playlists_by_user_id">
+                <xs:sequence>
+                    <xs:element name="user_id" type="xs:integer" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_playlists_by_user_idResponse">
+                <xs:sequence>
+                    <xs:element name="get_playlists_by_user_idResult" type="s0:SpynePlaylistArray"
+                        minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_song_by_id">
+                <xs:sequence>
+                    <xs:element name="id_" type="xs:integer" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_song_by_idResponse">
+                <xs:sequence>
+                    <xs:element name="get_song_by_idResult" type="s1:SpyneSong" minOccurs="0"
+                        nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_songs_by_playlist_id">
+                <xs:sequence>
+                    <xs:element name="playlist_id" type="xs:integer" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_songs_by_playlist_idResponse">
+                <xs:sequence>
+                    <xs:element name="get_songs_by_playlist_idResult" type="s1:SpyneSongArray"
+                        minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_user_by_id">
+                <xs:sequence>
+                    <xs:element name="id_" type="xs:integer" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_user_by_idResponse">
+                <xs:sequence>
+                    <xs:element name="get_user_by_idResult" type="s2:SpyneUser" minOccurs="0"
+                        nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_usersResponse">
+                <xs:sequence>
+                    <xs:element name="get_usersResult" type="s2:SpyneUserArray" minOccurs="0"
+                        nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_playlists_by_song_idResponse">
+                <xs:sequence>
+                    <xs:element name="get_playlists_by_song_idResult" type="s0:SpynePlaylistArray"
+                        minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="get_songsResponse">
+                <xs:sequence>
+                    <xs:element name="get_songsResult" type="s1:SpyneSongArray" minOccurs="0"
+                        nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="get_songs" type="tns:get_songs" />
+            <xs:element name="get_users" type="tns:get_users" />
+            <xs:element name="get_playlist_by_id" type="tns:get_playlist_by_id" />
+            <xs:element name="get_playlist_by_idResponse" type="tns:get_playlist_by_idResponse" />
+            <xs:element name="get_playlists_by_song_id" type="tns:get_playlists_by_song_id" />
+            <xs:element name="get_playlists_by_user_id" type="tns:get_playlists_by_user_id" />
+            <xs:element name="get_playlists_by_user_idResponse"
+                type="tns:get_playlists_by_user_idResponse" />
+            <xs:element name="get_song_by_id" type="tns:get_song_by_id" />
+            <xs:element name="get_song_by_idResponse" type="tns:get_song_by_idResponse" />
+            <xs:element name="get_songs_by_playlist_id" type="tns:get_songs_by_playlist_id" />
+            <xs:element name="get_songs_by_playlist_idResponse"
+                type="tns:get_songs_by_playlist_idResponse" />
+            <xs:element name="get_user_by_id" type="tns:get_user_by_id" />
+            <xs:element name="get_user_by_idResponse" type="tns:get_user_by_idResponse" />
+            <xs:element name="get_usersResponse" type="tns:get_usersResponse" />
+            <xs:element name="get_playlists_by_song_idResponse"
+                type="tns:get_playlists_by_song_idResponse" />
+            <xs:element name="get_songsResponse" type="tns:get_songsResponse" />
+        </xs:schema>
+        <xs:schema targetNamespace="python_server.adapters.soap.spynePlaylistService.index"
+            elementFormDefault="qualified">
+            <xs:complexType name="SpynePlaylist">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:integer" minOccurs="0" nillable="true" />
+                    <xs:element name="created_at" type="xs:dateTime" minOccurs="0" nillable="true" />
+                    <xs:element name="nome" type="xs:string" minOccurs="0" nillable="true" />
+                    <xs:element name="usuario_id" type="xs:integer" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SpynePlaylistArray">
+                <xs:sequence>
+                    <xs:element name="SpynePlaylist" type="s0:SpynePlaylist" minOccurs="0"
+                        maxOccurs="unbounded" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="SpynePlaylist" type="s0:SpynePlaylist" />
+            <xs:element name="SpynePlaylistArray" type="s0:SpynePlaylistArray" />
+        </xs:schema>
+        <xs:schema targetNamespace="python_server.adapters.soap.spyneSongService.index"
+            elementFormDefault="qualified">
+            <xs:complexType name="SpyneSong">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:integer" minOccurs="0" nillable="true" />
+                    <xs:element name="created_at" type="xs:dateTime" minOccurs="0" nillable="true" />
+                    <xs:element name="nome" type="xs:string" minOccurs="0" nillable="true" />
+                    <xs:element name="artista" type="xs:string" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SpyneSongArray">
+                <xs:sequence>
+                    <xs:element name="SpyneSong" type="s1:SpyneSong" minOccurs="0"
+                        maxOccurs="unbounded" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="SpyneSong" type="s1:SpyneSong" />
+            <xs:element name="SpyneSongArray" type="s1:SpyneSongArray" />
+        </xs:schema>
+        <xs:schema targetNamespace="python_server.adapters.soap.spyneUserService.index"
+            elementFormDefault="qualified">
+            <xs:complexType name="SpyneUser">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:integer" minOccurs="0" nillable="true" />
+                    <xs:element name="created_at" type="xs:dateTime" minOccurs="0" nillable="true" />
+                    <xs:element name="nome" type="xs:string" minOccurs="0" nillable="true" />
+                    <xs:element name="idade" type="xs:integer" minOccurs="0" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SpyneUserArray">
+                <xs:sequence>
+                    <xs:element name="SpyneUser" type="s2:SpyneUser" minOccurs="0"
+                        maxOccurs="unbounded" nillable="true" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="SpyneUser" type="s2:SpyneUser" />
+            <xs:element name="SpyneUserArray" type="s2:SpyneUserArray" />
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="get_user_by_id">
+        <wsdl:part name="get_user_by_id" element="tns:get_user_by_id" />
+    </wsdl:message>
+    <wsdl:message name="get_user_by_idResponse">
+        <wsdl:part name="get_user_by_idResponse" element="tns:get_user_by_idResponse" />
+    </wsdl:message>
+    <wsdl:message name="get_users">
+        <wsdl:part name="get_users" element="tns:get_users" />
+    </wsdl:message>
+    <wsdl:message name="get_usersResponse">
+        <wsdl:part name="get_usersResponse" element="tns:get_usersResponse" />
+    </wsdl:message>
+    <wsdl:message name="get_playlists_by_song_id">
+        <wsdl:part name="get_playlists_by_song_id" element="tns:get_playlists_by_song_id" />
+    </wsdl:message>
+    <wsdl:message name="get_playlists_by_song_idResponse">
+        <wsdl:part name="get_playlists_by_song_idResponse"
+            element="tns:get_playlists_by_song_idResponse" />
+    </wsdl:message>
+    <wsdl:message name="get_playlists_by_user_id">
+        <wsdl:part name="get_playlists_by_user_id" element="tns:get_playlists_by_user_id" />
+    </wsdl:message>
+    <wsdl:message name="get_playlists_by_user_idResponse">
+        <wsdl:part name="get_playlists_by_user_idResponse"
+            element="tns:get_playlists_by_user_idResponse" />
+    </wsdl:message>
+    <wsdl:message name="get_playlist_by_id">
+        <wsdl:part name="get_playlist_by_id" element="tns:get_playlist_by_id" />
+    </wsdl:message>
+    <wsdl:message name="get_playlist_by_idResponse">
+        <wsdl:part name="get_playlist_by_idResponse" element="tns:get_playlist_by_idResponse" />
+    </wsdl:message>
+    <wsdl:message name="get_songs">
+        <wsdl:part name="get_songs" element="tns:get_songs" />
+    </wsdl:message>
+    <wsdl:message name="get_songsResponse">
+        <wsdl:part name="get_songsResponse" element="tns:get_songsResponse" />
+    </wsdl:message>
+    <wsdl:message name="get_songs_by_playlist_id">
+        <wsdl:part name="get_songs_by_playlist_id" element="tns:get_songs_by_playlist_id" />
+    </wsdl:message>
+    <wsdl:message name="get_songs_by_playlist_idResponse">
+        <wsdl:part name="get_songs_by_playlist_idResponse"
+            element="tns:get_songs_by_playlist_idResponse" />
+    </wsdl:message>
+    <wsdl:message name="get_song_by_id">
+        <wsdl:part name="get_song_by_id" element="tns:get_song_by_id" />
+    </wsdl:message>
+    <wsdl:message name="get_song_by_idResponse">
+        <wsdl:part name="get_song_by_idResponse" element="tns:get_song_by_idResponse" />
+    </wsdl:message>
+    <wsdl:service name="SpyneUserService">
+        <wsdl:port name="Application" binding="tns:Application">
+            <wsdlsoap11:address location="http://localhost:8000/soap/" />
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:service name="SpynePlaylistService">
+        <wsdl:port name="Application" binding="tns:Application">
+            <wsdlsoap11:address location="http://localhost:8000/soap/" />
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:service name="SpyneSongService">
+        <wsdl:port name="Application" binding="tns:Application">
+            <wsdlsoap11:address location="http://localhost:8000/soap/" />
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="Application">
+        <wsdl:operation name="get_user_by_id" parameterOrder="get_user_by_id">
+            <wsdl:input name="get_user_by_id" message="tns:get_user_by_id" />
+            <wsdl:output name="get_user_by_idResponse" message="tns:get_user_by_idResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="get_users" parameterOrder="get_users">
+            <wsdl:input name="get_users" message="tns:get_users" />
+            <wsdl:output name="get_usersResponse" message="tns:get_usersResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="get_playlists_by_song_id" parameterOrder="get_playlists_by_song_id">
+            <wsdl:input name="get_playlists_by_song_id" message="tns:get_playlists_by_song_id" />
+            <wsdl:output name="get_playlists_by_song_idResponse"
+                message="tns:get_playlists_by_song_idResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="get_playlists_by_user_id" parameterOrder="get_playlists_by_user_id">
+            <wsdl:input name="get_playlists_by_user_id" message="tns:get_playlists_by_user_id" />
+            <wsdl:output name="get_playlists_by_user_idResponse"
+                message="tns:get_playlists_by_user_idResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="get_playlist_by_id" parameterOrder="get_playlist_by_id">
+            <wsdl:input name="get_playlist_by_id" message="tns:get_playlist_by_id" />
+            <wsdl:output name="get_playlist_by_idResponse" message="tns:get_playlist_by_idResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="get_songs" parameterOrder="get_songs">
+            <wsdl:input name="get_songs" message="tns:get_songs" />
+            <wsdl:output name="get_songsResponse" message="tns:get_songsResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="get_songs_by_playlist_id" parameterOrder="get_songs_by_playlist_id">
+            <wsdl:input name="get_songs_by_playlist_id" message="tns:get_songs_by_playlist_id" />
+            <wsdl:output name="get_songs_by_playlist_idResponse"
+                message="tns:get_songs_by_playlist_idResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="get_song_by_id" parameterOrder="get_song_by_id">
+            <wsdl:input name="get_song_by_id" message="tns:get_song_by_id" />
+            <wsdl:output name="get_song_by_idResponse" message="tns:get_song_by_idResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="Application" type="tns:Application">
+        <wsdlsoap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="get_user_by_id">
+            <wsdlsoap11:operation soapAction="get_user_by_id" style="document" />
+            <wsdl:input name="get_user_by_id">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="get_user_by_idResponse">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="get_users">
+            <wsdlsoap11:operation soapAction="get_users" style="document" />
+            <wsdl:input name="get_users">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="get_usersResponse">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="get_playlists_by_song_id">
+            <wsdlsoap11:operation soapAction="get_playlists_by_song_id" style="document" />
+            <wsdl:input name="get_playlists_by_song_id">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="get_playlists_by_song_idResponse">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="get_playlists_by_user_id">
+            <wsdlsoap11:operation soapAction="get_playlists_by_user_id" style="document" />
+            <wsdl:input name="get_playlists_by_user_id">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="get_playlists_by_user_idResponse">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="get_playlist_by_id">
+            <wsdlsoap11:operation soapAction="get_playlist_by_id" style="document" />
+            <wsdl:input name="get_playlist_by_id">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="get_playlist_by_idResponse">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="get_songs">
+            <wsdlsoap11:operation soapAction="get_songs" style="document" />
+            <wsdl:input name="get_songs">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="get_songsResponse">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="get_songs_by_playlist_id">
+            <wsdlsoap11:operation soapAction="get_songs_by_playlist_id" style="document" />
+            <wsdl:input name="get_songs_by_playlist_id">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="get_songs_by_playlist_idResponse">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="get_song_by_id">
+            <wsdlsoap11:operation soapAction="get_song_by_id" style="document" />
+            <wsdl:input name="get_song_by_id">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="get_song_by_idResponse">
+                <wsdlsoap11:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

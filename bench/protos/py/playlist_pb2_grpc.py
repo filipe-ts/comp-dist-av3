@@ -3,8 +3,8 @@
 import grpc
 import warnings
 
-import music_pb2 as music__pb2
 import playlist_pb2 as playlist__pb2
+import song_pb2 as song__pb2
 import user_pb2 as user__pb2
 
 GRPC_GENERATED_VERSION = '1.76.0'
@@ -36,29 +36,19 @@ class PlaylistServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetAllPlaylists = channel.unary_unary(
-                '/playlist_package.PlaylistService/GetAllPlaylists',
-                request_serializer=playlist__pb2.Empty.SerializeToString,
-                response_deserializer=playlist__pb2.PlaylistList.FromString,
-                _registered_method=True)
         self.GetPlaylist = channel.unary_unary(
                 '/playlist_package.PlaylistService/GetPlaylist',
                 request_serializer=playlist__pb2.PlaylistId.SerializeToString,
                 response_deserializer=playlist__pb2.Playlist.FromString,
-                _registered_method=True)
-        self.GetSongsInPlaylist = channel.unary_unary(
-                '/playlist_package.PlaylistService/GetSongsInPlaylist',
-                request_serializer=playlist__pb2.PlaylistId.SerializeToString,
-                response_deserializer=music__pb2.MusicList.FromString,
                 _registered_method=True)
         self.GetPlaylistsByUser = channel.unary_unary(
                 '/playlist_package.PlaylistService/GetPlaylistsByUser',
                 request_serializer=user__pb2.UserId.SerializeToString,
                 response_deserializer=playlist__pb2.PlaylistList.FromString,
                 _registered_method=True)
-        self.GetPlaylistsWithSong = channel.unary_unary(
-                '/playlist_package.PlaylistService/GetPlaylistsWithSong',
-                request_serializer=music__pb2.MusicId.SerializeToString,
+        self.GetPlaylistsBySongId = channel.unary_unary(
+                '/playlist_package.PlaylistService/GetPlaylistsBySongId',
+                request_serializer=song__pb2.SongId.SerializeToString,
                 response_deserializer=playlist__pb2.PlaylistList.FromString,
                 _registered_method=True)
 
@@ -66,19 +56,7 @@ class PlaylistServiceStub(object):
 class PlaylistServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def GetAllPlaylists(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetPlaylist(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetSongsInPlaylist(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -90,7 +68,7 @@ class PlaylistServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetPlaylistsWithSong(self, request, context):
+    def GetPlaylistsBySongId(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -99,29 +77,19 @@ class PlaylistServiceServicer(object):
 
 def add_PlaylistServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetAllPlaylists': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAllPlaylists,
-                    request_deserializer=playlist__pb2.Empty.FromString,
-                    response_serializer=playlist__pb2.PlaylistList.SerializeToString,
-            ),
             'GetPlaylist': grpc.unary_unary_rpc_method_handler(
                     servicer.GetPlaylist,
                     request_deserializer=playlist__pb2.PlaylistId.FromString,
                     response_serializer=playlist__pb2.Playlist.SerializeToString,
-            ),
-            'GetSongsInPlaylist': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetSongsInPlaylist,
-                    request_deserializer=playlist__pb2.PlaylistId.FromString,
-                    response_serializer=music__pb2.MusicList.SerializeToString,
             ),
             'GetPlaylistsByUser': grpc.unary_unary_rpc_method_handler(
                     servicer.GetPlaylistsByUser,
                     request_deserializer=user__pb2.UserId.FromString,
                     response_serializer=playlist__pb2.PlaylistList.SerializeToString,
             ),
-            'GetPlaylistsWithSong': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetPlaylistsWithSong,
-                    request_deserializer=music__pb2.MusicId.FromString,
+            'GetPlaylistsBySongId': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPlaylistsBySongId,
+                    request_deserializer=song__pb2.SongId.FromString,
                     response_serializer=playlist__pb2.PlaylistList.SerializeToString,
             ),
     }
@@ -134,33 +102,6 @@ def add_PlaylistServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class PlaylistService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def GetAllPlaylists(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/playlist_package.PlaylistService/GetAllPlaylists',
-            playlist__pb2.Empty.SerializeToString,
-            playlist__pb2.PlaylistList.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
 
     @staticmethod
     def GetPlaylist(request,
@@ -179,33 +120,6 @@ class PlaylistService(object):
             '/playlist_package.PlaylistService/GetPlaylist',
             playlist__pb2.PlaylistId.SerializeToString,
             playlist__pb2.Playlist.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def GetSongsInPlaylist(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/playlist_package.PlaylistService/GetSongsInPlaylist',
-            playlist__pb2.PlaylistId.SerializeToString,
-            music__pb2.MusicList.FromString,
             options,
             channel_credentials,
             insecure,
@@ -244,7 +158,7 @@ class PlaylistService(object):
             _registered_method=True)
 
     @staticmethod
-    def GetPlaylistsWithSong(request,
+    def GetPlaylistsBySongId(request,
             target,
             options=(),
             channel_credentials=None,
@@ -257,8 +171,8 @@ class PlaylistService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/playlist_package.PlaylistService/GetPlaylistsWithSong',
-            music__pb2.MusicId.SerializeToString,
+            '/playlist_package.PlaylistService/GetPlaylistsBySongId',
+            song__pb2.SongId.SerializeToString,
             playlist__pb2.PlaylistList.FromString,
             options,
             channel_credentials,
