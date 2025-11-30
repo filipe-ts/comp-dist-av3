@@ -1,0 +1,6 @@
+Method,Name,Error,Occurrences
+GET,/usuarios,"ConnectionResetError(104, 'Connection reset by peer')",114
+GET,Playlists com música,"ConnectionResetError(104, 'Connection reset by peer')",82
+GET,Playlists de usuário,"ConnectionResetError(104, 'Connection reset by peer')",98
+GET,/musicas,"ConnectionResetError(104, 'Connection reset by peer')",98
+GET,Músicas em playlist,"ConnectionResetError(104, 'Connection reset by peer')",98

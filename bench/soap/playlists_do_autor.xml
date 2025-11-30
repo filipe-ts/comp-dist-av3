@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdl="http://www.examples.com/wsdl/UserService.wsdl">
+   <soapenv:Header/>
+   <soapenv:Body>
+    <wsdl:GetPlaylistsByUserRequest>
+     <userId>{{userId}}</userId>
+    </wsdl:GetPlaylistsByUserRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

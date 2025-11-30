@@ -1,0 +1,6 @@
+Method,Name,Error,Occurrences
+POST,Músicas em playlist,"ConnectionResetError(104, 'Connection reset by peer')",124
+POST,/soap/playlists,"ConnectionResetError(104, 'Connection reset by peer')",115
+POST,/soap/usuarios,"ConnectionResetError(104, 'Connection reset by peer')",111
+POST,Playlists com música,"ConnectionResetError(104, 'Connection reset by peer')",115
+POST,/soap/musicas,"ConnectionResetError(104, 'Connection reset by peer')",132

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package music_package;
+
+service MusicService {
+  rpc GetAllMusic (Empty) returns (MusicList);
+  rpc GetMusic (MusicId) returns (Music);
+}
+
+message Empty {}
+
+message MusicId {
+  int32 id = 1;
+}
+
+message Music {
+  int32 id = 1;
+  string nome = 2;
+  string artista = 3;
+}
+
+message MusicList {
+  repeated Music musics = 1;
+}

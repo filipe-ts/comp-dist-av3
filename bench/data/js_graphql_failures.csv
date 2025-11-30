@@ -1,0 +1,6 @@
+Method,Name,Error,Occurrences
+POST,GetPlaylistsWithSong,"ConnectionResetError(104, 'Connection reset by peer')",201
+POST,GetAllMusics,"ConnectionResetError(104, 'Connection reset by peer')",196
+POST,GetPlaylistByUserId,"ConnectionResetError(104, 'Connection reset by peer')",192
+POST,GetAllUsers,"ConnectionResetError(104, 'Connection reset by peer')",202
+POST,GetSongsInPlaylist,"ConnectionResetError(104, 'Connection reset by peer')",196
