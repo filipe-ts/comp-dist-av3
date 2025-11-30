@@ -44,8 +44,3 @@ def create_grpc_container() -> Container:
     return create_container_sync(
             postgres_pool=pool, postgres_schema=postgres_schema
         )
-
-
-if __name__ == "__main__":
-    container = create_grpc_container()
-    start_grpc_server(container)
